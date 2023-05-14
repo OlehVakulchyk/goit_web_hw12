@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from goit_web_hw12.database.models import UserContact, User
 from goit_web_hw12.schemas import ContactModel
 
-NEXT_DAYS = 7
+NEXT_DAYS = 30
 
 async def get_users(limit: int, offset: int, db: Session, user: User):
     contacts = db.query(UserContact).filter_by(user_id=user.id).limit(limit).offset(offset)
@@ -42,7 +42,7 @@ async def get_users_by_bithday(limit: int, offset: int, db: Session, user: User)
                 contact_bithday.month, 
                 contact_bithday.day
                 ).date()
-        if current_datetime < bithday_this_year < date_end_bithdays:
+        if current_datetime <= bithday_this_year < date_end_bithdays:
             contacts_bithdays.append(contact)
     return contacts_bithdays
 

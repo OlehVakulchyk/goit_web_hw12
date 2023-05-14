@@ -1,7 +1,7 @@
 from random import randint, choice
 from faker import Faker
 
-from models import User
+from models import UserContact
 from db import SessionLocal
 
  # Создаем объект библиотеки Faker. В качестве параметра передаем local 'uk-UA'
@@ -20,15 +20,16 @@ def seed_users():
                           str(randint(100,999)) + '-' + 
                           str(randint(1,9)) + '-' +
                           str(randint(100,999)))
-            user = User(
+            contact = UserContact(
                   name = fake.first_name(),
                   surname = fake.last_name(),
                   email = fake.email(),
                   phone = choice([phone_1, phone_2]),
                   bithday = fake.date(),
+                  user_id = choice([1,2,3]),
                   information = str(i)
                   )
-            db.add(user)
+            db.add(contact)
         db.commit()
 
 if __name__ == '__main__':

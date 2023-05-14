@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, HTTPException, Depends, status, Security
 from fastapi.security import OAuth2PasswordRequestForm, HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
@@ -39,7 +37,6 @@ async def login(body: OAuth2PasswordRequestForm = Depends(), db: Session = Depen
 
 @router.get('/refresh_token', response_model=TokenModel)
 async def refresh_token(credentials: HTTPAuthorizationCredentials = Security(security), db: Session = Depends(get_db)):
-    print(1111111)
     token = credentials.credentials
     email = await auth_service.decode_refresh_token(token)
     user = await repository_auth.get_user_by_email(email, db)
