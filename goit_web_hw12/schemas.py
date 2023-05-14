@@ -10,7 +10,7 @@ class ContactModel(BaseModel):
     email: EmailStr
     phone: str = Field(example="+380(xx)xxx-xx-xx or +380(xx)xxx-x-xxx")
     bithday: date
-    user_id: int
+    # user_id: int
     information: str = Field('', max_length=250)
 
     @validator("phone")

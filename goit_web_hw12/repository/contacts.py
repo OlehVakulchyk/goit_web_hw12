@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from goit_web_hw12.database.models import UserContact, User
 from goit_web_hw12.schemas import ContactModel
 
-NEXT_DAYS = 30
+NEXT_DAYS = 7
 
 async def get_users(limit: int, offset: int, db: Session, user: User):
     contacts = db.query(UserContact).filter_by(user_id=user.id).limit(limit).offset(offset)
